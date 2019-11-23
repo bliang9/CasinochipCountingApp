@@ -3,4 +3,31 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="101dp"
+        android:text="Username" />
+
+    <TextView
+        android:id="@+id/typeinUserName"
+        android:layout_width="match_parent"
+        android:layout_height="107dp" />
+
+    <TextView
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:text="Password" />
+
+    <TextView
+        android:id="@+id/typeinPassword"
+        android:layout_width="match_parent"
+        android:layout_height="98dp" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login" />
 </LinearLayout>
