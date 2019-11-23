@@ -11,7 +11,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        TextView welcomeToCasinoChip = findViewById(R.id.welcomeToCasinochip);
-        Button enter = findViewById(R.id.login);
+        Button login = findViewById(R.id.login);
+
     }
 }
