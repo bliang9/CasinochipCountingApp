@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CasinochipCountingApp</string>
+    <string name="title_activity_game">game</string>
 </resources>
