@@ -11,16 +11,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/welcomeToCasinochip"
-            android:layout_width="match_parent"
-            android:layout_height="835dp"
-            android:text="Welcome to Casino Chip!" />
-
         <Button
             android:id="@+id/enter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="125dp"
             android:text="Enter" />
+
+        <TextView
+            android:id="@+id/welcomeToCasinochip"
+            android:layout_width="match_parent"
+            android:layout_height="560dp"
+            android:text="Welcome to Casino Chip!" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
