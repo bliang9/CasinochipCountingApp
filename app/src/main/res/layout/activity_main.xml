@@ -8,7 +8,8 @@
         android:id="@+id/welcomeToCasinochip"
         android:layout_width="match_parent"
         android:layout_height="393dp"
-        android:text="Welcome to Casino Chip!" />
+        android:text="Welcome to Casino Chip!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
     <Button
         android:id="@+id/enter"
