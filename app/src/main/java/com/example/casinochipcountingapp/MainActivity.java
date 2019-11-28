@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void enterGame() {
         Intent intent = new Intent(this, LoginActivity.class);
-        super.startActivity(intent);
+        startActivity(intent);
+        finish();
     }
 }

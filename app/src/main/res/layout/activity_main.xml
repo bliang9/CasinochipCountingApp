@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background= "@drawable/amanda-c-1148620-unsplash">
+    android:background= "@drawable/pokerchips">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/welcomeToCasinochip"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="393dp"
+        android:text="Welcome to Casino Chip!" />
 
-        <Button
-            android:id="@+id/enter"
-            android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:text="Enter" />
-
-        <TextView
-            android:id="@+id/welcomeToCasinochip"
-            android:layout_width="match_parent"
-            android:layout_height="560dp"
-            android:text="Welcome to Casino Chip!" />
-
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/enter"
+        android:layout_width="match_parent"
+        android:layout_height="174dp"
+        android:text="Enter" />
+        >
+</LinearLayout>
