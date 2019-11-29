@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "869180377022",
+    "firebase_url": "https://fir-auth-28a82.firebaseio.com",
+    "project_id": "fir-auth-28a82",
+    "storage_bucket": "fir-auth-28a82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869180377022:android:066887e5ddfeab6f091bef",
+        "android_client_info": {
+          "package_name": "com.example.casinochipcountingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869180377022-es94hsv1aclig9cikhuqjq1neaim73a1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNaZnHh459BJY_4nh7L74kfgtSMPvM0P4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869180377022-es94hsv1aclig9cikhuqjq1neaim73a1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

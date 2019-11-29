@@ -11,10 +11,12 @@
         android:layout_height="76dp"
         android:text="Game ID" />
 
-    <TextView
-        android:id="@+id/typeGameId"
+    <EditText
+        android:id="@+id/typeGameID"
         android:layout_width="match_parent"
-        android:layout_height="59dp" />
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/joinGame"
@@ -26,6 +28,7 @@
         android:id="@+id/createGame"
         android:layout_width="match_parent"
         android:layout_height="90dp"
+        android:text="Create Game"
         tools:visibility="visible" />
 
 </LinearLayout>

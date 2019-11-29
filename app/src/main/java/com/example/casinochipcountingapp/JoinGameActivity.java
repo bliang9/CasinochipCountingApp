@@ -1,6 +1,7 @@
 package com.example.casinochipcountingapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,7 +13,10 @@ public class JoinGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joingame);
-        TextView typeGameId = findViewById(R.id.typeGameId);
+        TextView gameID = findViewById(R.id.gameId);
+        gameID.setTextColor(Color.GRAY);
+        TextView typeGameId = findViewById(R.id.typeGameID);
+        typeGameId.setTextColor(Color.GREEN);
         Button joinGame = findViewById(R.id.joinGame);
         joinGame.setOnClickListener(unused -> createGame());
         Button createGame = findViewById(R.id.createGame);

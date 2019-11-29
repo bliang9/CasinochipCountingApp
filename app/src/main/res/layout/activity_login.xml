@@ -37,11 +37,29 @@
         android:layout_height="69dp"
         android:text="Login" />
 
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="TextView" />
+
     <Button
         android:id="@+id/createAccount"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:text="Create Account" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/forgetPassword"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="Forget Password" />
 
 
 </LinearLayout>
