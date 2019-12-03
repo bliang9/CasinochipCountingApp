@@ -27,7 +27,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseUserMetadata;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.UserInfo;
-import com.google.firebase.auth.UserRecord;
 import com.google.firebase.auth.zzy;
 import com.google.firebase.auth.zzz;
 
@@ -41,11 +40,14 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText typePhoneNumber;
     private EditText typePassword;
     private EditText typeConfirmPassword;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createaccount);
         //first name
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
         TextView firstName = findViewById(R.id.firstName);
         firstName.setTextColor(Color.YELLOW);
         typefirstName = findViewById(R.id.typeFirstName);
@@ -176,15 +178,38 @@ public class CreateAccountActivity extends AppCompatActivity {
                 name = typefirstName.getText().toString() +
                         typelastName.getText().toString();
             }
-
             //send email verification
-
+            User user = new User(typeEmail.getText().toString(),
+                                 typeConfirmPassword.getText().toString(),
+                                 name, typePhoneNumber.getText().toString(),
+                                 false);
+            progressBar.setVisibility(View.VISIBLE);
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    if (task.isSuccessful()) {
+                        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(CreateAccountActivity.this, "Successfully registered! check email to verify!",Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(CreateAccountActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    } else {
+                        Toast.makeText(CreateAccountActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
 
         }
-    }
-    public void signIn() {
-
     }
     public boolean checkPasswordLength(String password) {
         if (password.length() >= 8 && password.length() <= 20) {
