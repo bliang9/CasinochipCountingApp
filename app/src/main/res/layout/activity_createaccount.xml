@@ -88,12 +88,29 @@
             android:layout_height="wrap_content"
             android:text="Phone number" />
 
-        <EditText
-            android:id="@+id/typeinPhoneNumber"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:ems="10"
-            android:inputType="phone|textNoSuggestions" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+            </com.hbb20.CountryCodePicker>
+
+            <EditText
+                android:id="@+id/typeinPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:ems="10"
+                android:hint="Phone Number"
+                android:inputType="phone|textNoSuggestions"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/errorMessagePhoneNumber"

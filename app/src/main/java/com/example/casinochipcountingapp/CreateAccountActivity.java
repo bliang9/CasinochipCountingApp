@@ -29,6 +29,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.zzy;
 import com.google.firebase.auth.zzz;
+import com.hbb20.CountryCodePicker;
 
 import java.util.List;
 
@@ -41,11 +42,16 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText typePassword;
     private EditText typeConfirmPassword;
     private ProgressBar progressBar;
+    private CountryCodePicker countryCodePicker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createaccount);
         //first name
+        countryCodePicker = findViewById(R.id.ccp);
+        countryCodePicker.setDefaultCountryUsingNameCode("USA");
+        countryCodePicker.resetToDefaultCountry();
+        countryCodePicker.setContentColor(Color.YELLOW);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
         TextView firstName = findViewById(R.id.firstName);
@@ -79,6 +85,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         TextView phoneNumber = findViewById(R.id.phoneNumber);
         phoneNumber.setTextColor(Color.YELLOW);
         typePhoneNumber = findViewById(R.id.typeinPhoneNumber);
+        countryCodePicker.registerCarrierNumberEditText(typePhoneNumber);
         typePhoneNumber.setTextSize(20);
         typePhoneNumber.getBackground().mutate().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP);
         typePhoneNumber.setTextColor(Color.GREEN);
@@ -181,7 +188,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             //send email verification
             User user = new User(typeEmail.getText().toString(),
                                  typeConfirmPassword.getText().toString(),
-                                 name, typePhoneNumber.getText().toString(),
+                                 name, countryCodePicker.getFullNumberWithPlus(),
                                  false);
             progressBar.setVisibility(View.VISIBLE);
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

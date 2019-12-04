@@ -46,8 +46,7 @@
     <TextView
         android:id="@+id/errorMessage"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="TextView" />
+        android:layout_height="52dp" />
 
     <Button
         android:id="@+id/createAccount"
@@ -58,8 +57,7 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:text="TextView" />
+        android:layout_height="55dp" />
 
     <Button
         android:id="@+id/forgetPassword"
