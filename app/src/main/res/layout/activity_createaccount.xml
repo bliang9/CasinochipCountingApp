@@ -12,6 +12,7 @@
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
+            android:layout_gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -19,6 +20,7 @@
             android:id="@+id/firstName"
             android:layout_width="158dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
             android:text="First Name" />
 
         <EditText

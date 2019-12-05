@@ -1,11 +1,15 @@
 package com.example.casinochipcountingapp;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +30,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseUserMetadata;
 import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.auth.zzy;
 import com.google.firebase.auth.zzz;
 import com.hbb20.CountryCodePicker;
@@ -49,9 +55,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_createaccount);
         //first name
         countryCodePicker = findViewById(R.id.ccp);
-        countryCodePicker.setDefaultCountryUsingNameCode("USA");
         countryCodePicker.resetToDefaultCountry();
-        countryCodePicker.setContentColor(Color.YELLOW);
+        countryCodePicker.setDefaultCountryUsingNameCode("USA");
+        countryCodePicker.setContentColor(Color.GREEN);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
         TextView firstName = findViewById(R.id.firstName);
@@ -143,6 +149,11 @@ public class CreateAccountActivity extends AppCompatActivity {
             errorMesphoneNumber.setTextColor(Color.RED);
             errorMesphoneNumber.setText("Enter Phone Number!");
             allFilledIn = false;
+        } else if (!countryCodePicker.isValidFullNumber()) {
+            errorMesphoneNumber.setTextSize(20);
+            errorMesphoneNumber.setTextColor(Color.RED);
+            errorMesphoneNumber.setText("Invalid Phone Number!");
+            allFilledIn = false;
         }
         String passWord = typePassword.getText().toString();
         TextView errorMesPassword = findViewById(R.id.errorMessagePassword);
@@ -185,32 +196,57 @@ public class CreateAccountActivity extends AppCompatActivity {
                 name = typefirstName.getText().toString() +
                         typelastName.getText().toString();
             }
+            final String fullName = name;
             //send email verification
-            User user = new User(typeEmail.getText().toString(),
-                                 typeConfirmPassword.getText().toString(),
-                                 name, countryCodePicker.getFullNumberWithPlus(),
-                                 false);
-            progressBar.setVisibility(View.VISIBLE);
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Creating account");
+            progressDialog.setButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    progressDialog.dismiss();
+                }
+            });
+            progressDialog.show();
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(typeEmail.getText().toString(), typeConfirmPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    progressBar.setVisibility(View.INVISIBLE);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CreateAccountActivity.this);
+                    builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            builder.create().dismiss();
+                        }
+                    });
                     if (task.isSuccessful()) {
-                        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fullName).build();
+                        FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileChangeRequest);
+                        FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(CreateAccountActivity.this, "Successfully registered! check email to verify!",Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(CreateAccountActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                                }
+                                    progressDialog.dismiss();
+                                    if (task.isSuccessful()) {
+                                        System.out.println(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                                        builder.setTitle("Successful Register!");
+                                        builder.setMessage("Registered Successfully! Check email for email verification! Verify it before moving to the next step!");
+                                        builder.show();
+                                        while (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                                            continue;
+                                        }
+                                        Intent intent = new Intent(CreateAccountActivity.this, TwoFactorAuthActivity.class);
+                                        intent.putExtra("Phone Number", countryCodePicker.getFullNumber());
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        builder.setMessage(task.getException().getMessage());
+                                        builder.show();
+                                    }
                             }
                         });
                     } else {
-                        Toast.makeText(CreateAccountActivity.this, task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                        builder.setMessage("Failure");
+                        builder.setMessage(task.getException().getMessage());
+                        builder.create();
                     }
                 }
             });

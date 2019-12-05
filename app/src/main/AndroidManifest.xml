@@ -24,7 +24,7 @@
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".GameActivity" />
         <activity android:name=".PasswordReset" />
-
+        <activity android:name=".TwoFactorAuthActivity" />
         <meta-data android:name="com.google.android.gms.version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"

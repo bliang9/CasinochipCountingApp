@@ -3,4 +3,36 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/code"
+        android:layout_width="350dp"
+        android:layout_height="43dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:text="Verification Code" />
+
+    <EditText
+        android:id="@+id/typeVerificationCode"
+        android:layout_width="345dp"
+        android:layout_height="69dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/verifyCode"
+        android:layout_width="299dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:text="VERIFY CODE" />
+
+    <Button
+        android:id="@+id/resendCode"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:text="RESEND CODE" />
 </LinearLayout>

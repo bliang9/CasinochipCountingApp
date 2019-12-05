@@ -1,5 +1,8 @@
 package com.example.casinochipcountingapp;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -61,21 +64,34 @@ public class LoginActivity extends AppCompatActivity {
         TextView errorMessage = findViewById(R.id.errorMessage);
         errorMessage.setTextSize(25);
         errorMessage.setTextColor(Color.RED);
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Logging in");
         if (email != null && password != null && email.length() != 0 && password.length() != 0) {
-            progressBar.setVisibility(View.VISIBLE);
+            progressDialog.show();
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    progressBar.setVisibility(View.INVISIBLE);
+                    progressDialog.dismiss();
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
+                    alertDialog.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            alertDialog.create().dismiss();
+                        }
+                    });
                     if (task.isSuccessful()) {
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        User current = (User) user;
-                        Toast.makeText(LoginActivity.this, "Successful login", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(LoginActivity.this, JoinGameActivity.class);
+                        alertDialog.setMessage("Successfully Logged In!");
+                        alertDialog.create().show();
+                        System.out.println(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
+                        System.out.println(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                        Intent intent = new Intent(LoginActivity.this, TwoFactorAuthActivity.class);
+                        intent.putExtra("Phone Number", FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
                         startActivity(intent);
                         finish();
+                        //User current = (User) user;
                     } else {
-                        Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        alertDialog.setMessage(task.getException().getMessage());
+                        alertDialog.create().show();
                     }
                 }
             });
