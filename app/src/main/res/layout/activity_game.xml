@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background= "@drawable/pokerchips">
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="88dp"
+        android:layout_height="90dp"
+        android:background="@drawable/add_button"
+        android:foreground="@drawable/add_button"
+        android:textColorLink="#00F5F2F2" />
+
+    <Button
+        android:id="@+id/minus"
+        android:layout_width="88dp"
+        android:layout_height="81dp"
+        android:background="@drawable/minus_button"
+        android:text="Button" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
 
 </LinearLayout>
