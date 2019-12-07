@@ -17,6 +17,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 public class TwoFactorAuthActivity extends AppCompatActivity {
+    private String verificationID;
     private String phoneNumber;
     private EditText typeVerificationCode;
     @Override
@@ -26,7 +27,7 @@ public class TwoFactorAuthActivity extends AppCompatActivity {
         System.out.println(FirebaseAuth.getInstance().getCurrentUser() != null);
         phoneNumber = getIntent().getStringExtra("Phone Number");
         typeVerificationCode = findViewById(R.id.typeVerificationCode);
-
+        verificationCode();
     }
     public void verificationCode() {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -35,6 +36,7 @@ public class TwoFactorAuthActivity extends AppCompatActivity {
                 TimeUnit.SECONDS,
                 this, callBack);
     }
+    //retrieved from https://www.youtube.com/watch?v=JZ8hwzBKsMM
     PhoneAuthProvider.OnVerificationStateChangedCallbacks callBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -49,6 +51,7 @@ public class TwoFactorAuthActivity extends AppCompatActivity {
         }
         public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
+            verificationID = s;
         }
     };
 
