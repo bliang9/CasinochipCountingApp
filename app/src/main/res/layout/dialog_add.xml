@@ -5,10 +5,13 @@
 
     <TextView
         android:id="@+id/addtextView"
-        android:layout_width="wrap_content"
-        android:layout_height="53dp"
+        android:layout_width="412dp"
+        android:layout_height="63dp"
         android:layout_gravity="center"
+        android:background="@drawable/button_texture5"
         android:text="Add Chips"
+        android:textAlignment="center"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -30,10 +33,11 @@
         <Button
             android:id="@+id/addAgree"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="86dp"
             android:layout_weight="1"
-            android:background="@color/common_google_signin_btn_text_dark_default"
+            android:background="@drawable/button_texture5"
             android:text="@android:string/yes"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="24sp" />
 
     </LinearLayout>

@@ -1,10 +1,13 @@
 package com.example.casinochipcountingapp;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,85 +16,87 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class GameActivity extends AppCompatActivity {
-    /*
-    * The total amount of player chips.
-     */
-    private int playerChipAmount;
-    private int currentRound;
+public class GameActivity extends StartGame {
+
+    private int currentRound = 1;
     private ArrayList<String> recordList;
     private TextView playerAmount;
-    private Button add;
-    private Button minus;
+    private Button exit;
     private Button nextRound;
     private Button record;
+    private Button exitAgree;
+    private Button exitCancel;
     private Button confirmReady;
     private Button cancelReady;
-    private TextView addtextView;
-    private TextView minustextView;
+    private Button newGame;
+    private Button newGameExit;
     private TextView readyNext;
-    private EditText addAmount;
-    private EditText minusAmount;
-    private Button addAgree;
-    private Button minusAgree;
-    private AlertDialog adddialog;
-    private AlertDialog minusdialog;
+    private TextView exitAlert;
+    private TextView gameFinished;
+    private TextView gameNumber;
     private AlertDialog nextdialog;
+    private AlertDialog exitdialog;
+    private AlertDialog newgamedialog;
+
+
+    private TextView betTextView;
+    private EditText editBet;
+    private Button betAgree;
+    private Button fold;
+    private Button check;
+    private Button call;
+    private Button allin;
+    private AlertDialog betdialog;
+
+    public int betAmount;
+    public static int amountStart;
+    public static int amountEnd;
+    public static int amountChange;
+
 
     /**
      *
      * @param savedInstanceState
      */
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        add = findViewById(R.id.add);
-        minus = findViewById(R.id.minus);
-        playerAmount = findViewById(R.id.playerAmount);
+        amountStart = playerChipAmount;
+        String amount = Integer.toString(playerChipAmount);
+        ((TextView) findViewById(R.id.playerAmount)).setText(amount);
         nextRound = findViewById(R.id.nextRound);
         record = findViewById(R.id.record);
 
-        add.setOnClickListener(new View.OnClickListener() {
+        exit = findViewById(R.id.exit);
+
+        exit.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(GameActivity.this);
-                View mView = getLayoutInflater().inflate(R.layout.dialog_add, null);
-                addAmount = mView.findViewById(R.id.addAmount);
-                addAgree = mView.findViewById(R.id.addAgree);
-                addtextView = mView.findViewById(R.id.addtextView);
+                View mView = getLayoutInflater().inflate(R.layout.dialog_exitwarning, null);
+                exitAlert = mView.findViewById(R.id.exitAlert);
+                exitAgree = mView.findViewById(R.id.exitagree);
+                exitCancel = mView.findViewById(R.id.exitcancel);
 
-
-                addAgree.setOnClickListener(unused -> addChips());
+                exitAgree.setOnClickListener(unused -> exitGame());
+                exitCancel.setOnClickListener(unused -> {
+                    exitdialog.cancel();
+                });
 
                 mBuilder.setView(mView);
                 AlertDialog k = mBuilder.create();
-                adddialog = k;
-                adddialog.show();
-                addAgree.setOnClickListener(unused -> addChips());
+                exitdialog = k;
+                exitdialog.show();
             }
 
         });
 
-        minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(GameActivity.this);
-                View mView = getLayoutInflater().inflate(R.layout.dialog_minus, null);
-                minusAmount = mView.findViewById(R.id.minusAmount);
-                minusAgree = mView.findViewById(R.id.minusAgree);
-                minustextView = mView.findViewById(R.id.minustextView);
+        record.setOnClickListener(unused -> visitRecord());
 
-
-                minusAgree.setOnClickListener(unused -> minusChips());
-                mBuilder.setView(mView);
-                AlertDialog k = mBuilder.create();
-                minusdialog = k;
-                minusdialog.show();
-                minusAgree.setOnClickListener(unused -> minusChips());
-            }
-
-        });
 
         nextRound.setOnClickListener(new View.OnClickListener() {
 
@@ -115,6 +120,14 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    private void visitRecord() {
+        Intent intent = new Intent(this, GameRecordList.class);
+        startActivity(intent);
+        finish();
+
+    }
+
+
     private void countRound() {
         confirmReady.setOnClickListener(unused -> {
             if (currentRound < 4) {
@@ -125,11 +138,17 @@ public class GameActivity extends AppCompatActivity {
                         "READY!",
                         Toast.LENGTH_SHORT).show();
                 nextdialog.cancel();
+                nextRound();
+
             } else {
                 Toast.makeText(GameActivity.this,
                         "Game Finished!",
                         Toast.LENGTH_SHORT).show();
                 nextdialog.cancel();
+                amountEnd = playerChipAmount;
+                amountChange = amountEnd - amountStart;
+
+                newGame();
             }
         });
         cancelReady.setOnClickListener(unused -> {
@@ -141,22 +160,44 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    private void nextRound() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(GameActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_bet, null);
+        editBet = mView.findViewById(R.id.editBet);
+        betTextView = mView.findViewById(R.id.betTextView);
+        betAgree = mView.findViewById(R.id.betAgree);
+        fold = mView.findViewById(R.id.fold);
+        check = mView.findViewById(R.id.check);
+        call = mView.findViewById(R.id.call);
+        allin = mView.findViewById(R.id.allin);
 
-    /**
-     * Called when user is adding chips.
-*/
-    private void addChips() {
-        String typein = addAmount.getText().toString();
+        betAgree.setOnClickListener(unused -> betAmount());
+        fold.setOnClickListener(unused -> foldChoice());
+        check.setOnClickListener(unused -> checkChoice());
+        call.setOnClickListener(unused -> callChoice());
+        allin.setOnClickListener(unused -> allinChoice());
+
+
+
+        mBuilder.setView(mView);
+        AlertDialog k = mBuilder.create();
+        betdialog = k;
+        betdialog.show();
+    }
+
+    private void betAmount() {
+        String typein = editBet.getText().toString();
         if (isNumeric(typein)) {
-            int addamount = Integer.parseInt(typein);
-            playerChipAmount += addamount;
-            String amount = Integer.toString(playerChipAmount);
-            ((TextView) findViewById(R.id.playerAmount)).setText(amount);
+            int betamount = Integer.parseInt(typein);
+            playerChipAmount -= betamount;
+            String bet = Integer.toString(playerChipAmount);
+            ((TextView) findViewById(R.id.playerAmount)).setText(bet);
+
             Toast.makeText(GameActivity.this,
-                    "Add Successful",
+                    "Bet Successful",
                     Toast.LENGTH_SHORT).show();
 
-            adddialog.cancel();
+            betdialog.cancel();
 
 
         } else {
@@ -164,47 +205,65 @@ public class GameActivity extends AppCompatActivity {
                     "Only Type In Number",
                     Toast.LENGTH_SHORT).show();
         }
+
     }
 
-    private void minusChips() {
-        String typein = minusAmount.getText().toString();
-        if (isNumeric(typein)) {
-            int minusamount = Integer.parseInt(typein);
-            if (minusamount % 5 !=0) {
-                Toast.makeText(GameActivity.this,
-                        "Number has to be the Multiples of 5",
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                playerChipAmount -= minusamount;
-                String amount = Integer.toString(playerChipAmount);
-                ((TextView) findViewById(R.id.playerAmount)).setText(amount);
-                Toast.makeText(GameActivity.this,
-                        "Minus Successful",
-                        Toast.LENGTH_SHORT).show();
+    private void foldChoice() {
+        betdialog.cancel();
+        newGame();
+    }
 
-                minusdialog.cancel();
-            }
+    private void checkChoice() {
+        String bet = Integer.toString(playerChipAmount);
+        ((TextView) findViewById(R.id.playerAmount)).setText(bet);
 
+    }
+
+    private void callChoice() {
+        String bet = Integer.toString(playerChipAmount);
+        ((TextView) findViewById(R.id.playerAmount)).setText(bet);
+    }
+
+    private void allinChoice() {
+        if (playerChipAmount > 0) {
+            betAmount = playerChipAmount;
+            playerChipAmount = 0;
+            String bet = Integer.toString(playerChipAmount);
+            ((TextView) findViewById(R.id.playerAmount)).setText(bet);
+            betdialog.cancel();
         } else {
             Toast.makeText(GameActivity.this,
-                    "Only Type In Number",
+                    "Not Enough Chips",
                     Toast.LENGTH_SHORT).show();
+            betdialog.cancel();
         }
-
-
     }
 
 
-    public static boolean isNumeric(String strNum) {
-        if (strNum == null) {
-            return false;
-        }
-        try {
-            int d = Integer.parseInt(strNum);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
+
+    private void newGame() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(GameActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_continuenewgame, null);
+        gameFinished = mView.findViewById(R.id.gameFinished);
+        newGame = mView.findViewById(R.id.newGame);
+        newGameExit = mView.findViewById(R.id.newGameExit);
+
+        newGame.setOnClickListener(unused -> continueNewGame());
+        newGameExit.setOnClickListener(unused -> exitGame());
+
+        mBuilder.setView(mView);
+        AlertDialog k = mBuilder.create();
+        newgamedialog = k;
+        newgamedialog.show();
     }
+
+    private void continueNewGame() {
+        gamenumber++;
+        Intent intent = new Intent(this, StartGame.class);
+        startActivity(intent);
+        finish();
+    }
+
+
 
 }
