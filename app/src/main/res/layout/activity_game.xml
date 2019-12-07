@@ -7,65 +7,54 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="181dp"
+        android:layout_height="78dp"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/add"
-                android:layout_width="88dp"
-                android:layout_height="90dp"
-                android:background="@drawable/add_button"
-                android:foreground="@drawable/add_button"
-                android:textColorLink="#00F5F2F2" />
-
-            <Button
-                android:id="@+id/minus"
-                android:layout_width="88dp"
-                android:layout_height="81dp"
-                android:background="@drawable/minus_button" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/add"
+            android:layout_width="76dp"
+            android:layout_height="75dp"
+            android:background="@drawable/plus_sign"
+            android:foreground="@drawable/plus_sign"
+            android:textColorLink="#00F5F2F2" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="95dp"
+            android:layout_height="73dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="278dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/totalAmount"
-                    android:layout_width="393dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Total Amount:"
-                    android:textSize="30sp"
+                    android:layout_width="371dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:autoSizeMaxTextSize="@dimen/activity_vertical_margin"
+                    android:text="Total Bet Amount:"
                     android:textAlignment="textStart"
-                    android:textStyle="bold"
-                    android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/playerAmount"
                     android:layout_width="393dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:autoSizeMaxTextSize="@dimen/activity_vertical_margin"
                     android:text="0"
                     android:textAlignment="textEnd"
                     android:textColor="@color/common_google_signin_btn_text_dark_default"
-                    android:textSize="50sp"
+                    android:textSize="40dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -73,10 +62,84 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="69dp"
+        android:orientation="horizontal">
 
-    </FrameLayout>
+        <Button
+            android:id="@+id/minus"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/minus_sign" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/round"
+                    android:layout_width="456dp"
+                    android:layout_height="93dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="@dimen/activity_vertical_margin"
+                    android:text="Round"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textSize="45dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/roundNumber"
+                    android:layout_width="393dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="@dimen/activity_vertical_margin"
+                    android:text="0"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textSize="50dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/nextRound"
+            android:layout_width="107dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_texture2"
+            android:text="Next Round"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/record"
+            android:layout_width="107dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_texture3"
+            android:text="Record"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

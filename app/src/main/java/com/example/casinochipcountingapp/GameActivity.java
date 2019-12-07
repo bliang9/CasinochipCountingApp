@@ -11,22 +11,33 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class GameActivity extends AppCompatActivity {
     /*
     * The total amount of player chips.
      */
     private int playerChipAmount;
+    private int currentRound;
+    private ArrayList<String> recordList;
     private TextView playerAmount;
     private Button add;
     private Button minus;
+    private Button nextRound;
+    private Button record;
+    private Button confirmReady;
+    private Button cancelReady;
     private TextView addtextView;
     private TextView minustextView;
+    private TextView readyNext;
     private EditText addAmount;
     private EditText minusAmount;
     private Button addAgree;
     private Button minusAgree;
     private AlertDialog adddialog;
     private AlertDialog minusdialog;
+    private AlertDialog nextdialog;
+
     /**
      *
      * @param savedInstanceState
@@ -38,6 +49,8 @@ public class GameActivity extends AppCompatActivity {
         add = findViewById(R.id.add);
         minus = findViewById(R.id.minus);
         playerAmount = findViewById(R.id.playerAmount);
+        nextRound = findViewById(R.id.nextRound);
+        record = findViewById(R.id.record);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,9 +93,55 @@ public class GameActivity extends AppCompatActivity {
 
         });
 
+        nextRound.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(GameActivity.this);
+                View mView = getLayoutInflater().inflate(R.layout.dialog_nextround, null);
+                readyNext = mView.findViewById(R.id.readyNext);
+                confirmReady = mView.findViewById(R.id.confirmReady);
+                cancelReady = mView.findViewById(R.id.cancelReady);
+                countRound();
+                mBuilder.setView(mView);
+                AlertDialog k = mBuilder.create();
+                nextdialog = k;
+                nextdialog.show();
+            }
+
+        });
+
 
 
     }
+
+    private void countRound() {
+        confirmReady.setOnClickListener(unused -> {
+            if (currentRound < 4) {
+                currentRound++;
+                String round = Integer.toString(currentRound);
+                ((TextView) findViewById(R.id.roundNumber)).setText(round);
+                Toast.makeText(GameActivity.this,
+                        "READY!",
+                        Toast.LENGTH_SHORT).show();
+                nextdialog.cancel();
+            } else {
+                Toast.makeText(GameActivity.this,
+                        "Game Finished!",
+                        Toast.LENGTH_SHORT).show();
+                nextdialog.cancel();
+            }
+        });
+        cancelReady.setOnClickListener(unused -> {
+            Toast.makeText(GameActivity.this,
+                    "NOT READY",
+                    Toast.LENGTH_SHORT).show();
+            nextdialog.cancel();
+        });
+
+    }
+
+
     /**
      * Called when user is adding chips.
 */
@@ -90,20 +149,15 @@ public class GameActivity extends AppCompatActivity {
         String typein = addAmount.getText().toString();
         if (isNumeric(typein)) {
             int addamount = Integer.parseInt(typein);
-            if (addamount % 5 !=0) {
-                Toast.makeText(GameActivity.this,
-                        "Number has to be the Multiples of 5",
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                playerChipAmount += addamount;
-                String amount = Integer.toString(playerChipAmount);
-                ((TextView) findViewById(R.id.playerAmount)).setText(amount);
-                Toast.makeText(GameActivity.this,
-                        "Add Successful",
-                        Toast.LENGTH_SHORT).show();
+            playerChipAmount += addamount;
+            String amount = Integer.toString(playerChipAmount);
+            ((TextView) findViewById(R.id.playerAmount)).setText(amount);
+            Toast.makeText(GameActivity.this,
+                    "Add Successful",
+                    Toast.LENGTH_SHORT).show();
 
-                adddialog.cancel();
-            }
+            adddialog.cancel();
+
 
         } else {
             Toast.makeText(GameActivity.this,
