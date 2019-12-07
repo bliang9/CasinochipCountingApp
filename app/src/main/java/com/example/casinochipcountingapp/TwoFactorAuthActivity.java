@@ -1,6 +1,9 @@
 package com.example.casinochipcountingapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,12 +18,14 @@ import java.util.concurrent.TimeUnit;
 
 public class TwoFactorAuthActivity extends AppCompatActivity {
     private String phoneNumber;
+    private EditText typeVerificationCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twofactorauth);
         System.out.println(FirebaseAuth.getInstance().getCurrentUser() != null);
         phoneNumber = getIntent().getStringExtra("Phone Number");
+        typeVerificationCode = findViewById(R.id.typeVerificationCode);
 
     }
     public void verificationCode() {
@@ -33,7 +38,9 @@ public class TwoFactorAuthActivity extends AppCompatActivity {
     PhoneAuthProvider.OnVerificationStateChangedCallbacks callBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-
+            if (phoneAuthCredential.getSmsCode().equals(typeVerificationCode.getText().toString())) {
+                //
+            }
         }
 
         @Override

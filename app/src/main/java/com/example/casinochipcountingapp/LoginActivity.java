@@ -1,5 +1,6 @@
 package com.example.casinochipcountingapp;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +28,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
     private TextView typeinEmail;
     private TextView typeinPassword;
-    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         typeinPassword.setTextColor(Color.GREEN);
         Button createAccount = findViewById(R.id.createAccount);
         createAccount.setOnClickListener(unused -> createAccount());
-        progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.INVISIBLE);
         TextView error = findViewById(R.id.errorMessage);
         error.setVisibility(View.INVISIBLE);
     }
@@ -112,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     public void createAccount() {
-        Intent intent = new Intent(this, CreateAccountActivity.class);
+        Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
         startActivity(intent);
         finish();
     }

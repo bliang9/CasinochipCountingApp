@@ -219,34 +219,39 @@ public class CreateAccountActivity extends AppCompatActivity {
                     });
                     if (task.isSuccessful()) {
                         UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fullName).build();
-                        FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileChangeRequest);
-                        FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                    progressDialog.dismiss();
-                                    if (task.isSuccessful()) {
-                                        System.out.println(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-                                        builder.setTitle("Successful Register!");
-                                        builder.setMessage("Registered Successfully! Check email for email verification! Verify it before moving to the next step!");
-                                        builder.show();
-                                        while (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
-                                            continue;
+                                if (task.isSuccessful()) {
+                                    FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            progressDialog.dismiss();
+                                            if (task.isSuccessful()) {
+                                                System.out.println(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                                                builder.setTitle("Successful Register!");
+                                                builder.setMessage("Registered Successfully! Check email for email verification! Verify it before moving to the next step!");
+                                                builder.show();
+                                                while (!FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                                                    continue;
+                                                }
+                                                Intent intent = new Intent(CreateAccountActivity.this, TwoFactorAuthActivity.class);
+                                                intent.putExtra("Phone Number", countryCodePicker.getFullNumber());
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                builder.setMessage(task.getException().getMessage());
+                                                builder.show();
+                                            }
                                         }
-                                        Intent intent = new Intent(CreateAccountActivity.this, TwoFactorAuthActivity.class);
-                                        intent.putExtra("Phone Number", countryCodePicker.getFullNumber());
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        builder.setMessage(task.getException().getMessage());
-                                        builder.show();
-                                    }
+                                    });
+                                } else {
+                                    progressDialog.dismiss();
+                                    builder.setMessage(task.getException().getMessage());
+                                    builder.create();
+                                }
                             }
-                        });
-                    } else {
-                        progressDialog.dismiss();
-                        builder.setMessage("Failure");
-                        builder.setMessage(task.getException().getMessage());
-                        builder.create();
+                         });
                     }
                 }
             });
