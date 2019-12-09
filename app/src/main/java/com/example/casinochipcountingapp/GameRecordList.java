@@ -12,9 +12,8 @@ import android.widget.TextView;
 public class GameRecordList extends GameActivity {
 
     private Button back;
-    private ScrollView myRecordScroll;
-    public static LinearLayout myGameHistory;
-    private TextView historyText;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +22,13 @@ public class GameRecordList extends GameActivity {
         myGameHistory = findViewById(R.id.myGameHistory);
         View viewmyrecord = getLayoutInflater().inflate(R.layout.chunk_gamehistory, myGameHistory, false);
         myRecordScroll = viewmyrecord.findViewById(R.id.myRecordScroll);
-        String addTo = "GAME " + gamenumber + "       " + amountChange ;
-        historyText = viewmyrecord.findViewById(R.id.history);
-        historyText.setText(addTo);
+        for (int i = 0; i < historyList.size(); i++ ) {
+            TextView textView = new TextView(GameRecordList.this);
+            textView.setText(historyList.get(i));
 
+        }
         myGameHistory.addView(viewmyrecord);
+
         /*
          */
 

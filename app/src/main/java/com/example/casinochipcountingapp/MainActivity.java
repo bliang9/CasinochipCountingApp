@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         enter.setOnClickListener(unused -> enterGame());
     }
     public void enterGame() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, StartGame.class);
         startActivity(intent);
         finish();
     }

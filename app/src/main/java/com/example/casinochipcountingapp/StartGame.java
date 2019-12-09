@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,10 @@ public class StartGame extends AppCompatActivity {
     private String gameId;
     private ArrayList<String> players;
     private String owner;
+    public LinearLayout myGameHistory;
+    public ScrollView myRecordScroll;
+    public ArrayList<String> historyList = new ArrayList<>();
+    public static int amountChange;
 
 
     @Override
@@ -80,8 +85,9 @@ public class StartGame extends AppCompatActivity {
 
     }
     public void startGame() {
-        Game g = (Game) getIntent().getSerializableExtra("game");
-        g.updateGameState(1);
+        //Game g = (Game) getIntent().getSerializableExtra("game");
+        //g.updateGameState(1);
+        historyList.add("Game "  + gamenumber + "  " + amountChange);
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
         finish();
@@ -89,8 +95,8 @@ public class StartGame extends AppCompatActivity {
     public void exitGame() {
         playerChipAmount = 0;
         gamenumber = 1;
-        Game g = (Game) getIntent().getSerializableExtra("game");
-        g.updateGameState(2);
+        //Game g = (Game) getIntent().getSerializableExtra("game");
+        //g.updateGameState(2);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

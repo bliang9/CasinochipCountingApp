@@ -1,11 +1,13 @@
 package com.example.casinochipcountingapp;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DatabaseReference;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class Game implements Serializable {
+public class Game extends AppCompatActivity implements Serializable {
     public String gameId;
     public String owner;
     public List<String> players;

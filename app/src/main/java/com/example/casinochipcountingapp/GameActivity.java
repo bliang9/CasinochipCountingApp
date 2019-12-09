@@ -49,9 +49,9 @@ public class GameActivity extends StartGame {
     private AlertDialog betdialog;
 
     public int betAmount;
-    public static int amountStart;
-    public static int amountEnd;
-    public static int amountChange;
+    private int amountStart;
+    private int amountEnd;
+
 
 
     /**
@@ -69,6 +69,16 @@ public class GameActivity extends StartGame {
         ((TextView) findViewById(R.id.playerAmount)).setText(amount);
         nextRound = findViewById(R.id.nextRound);
         record = findViewById(R.id.record);
+
+
+
+
+
+
+
+
+
+
 
         exit = findViewById(R.id.exit);
 
@@ -145,8 +155,7 @@ public class GameActivity extends StartGame {
                         "Game Finished!",
                         Toast.LENGTH_SHORT).show();
                 nextdialog.cancel();
-                amountEnd = playerChipAmount;
-                amountChange = amountEnd - amountStart;
+
 
                 newGame();
             }
@@ -190,6 +199,7 @@ public class GameActivity extends StartGame {
         if (isNumeric(typein)) {
             int betamount = Integer.parseInt(typein);
             playerChipAmount -= betamount;
+            amountChange = playerChipAmount - amountStart;
             String bet = Integer.toString(playerChipAmount);
             ((TextView) findViewById(R.id.playerAmount)).setText(bet);
 
@@ -247,6 +257,8 @@ public class GameActivity extends StartGame {
         gameFinished = mView.findViewById(R.id.gameFinished);
         newGame = mView.findViewById(R.id.newGame);
         newGameExit = mView.findViewById(R.id.newGameExit);
+        amountEnd = playerChipAmount;
+        amountChange = amountEnd - amountStart;
 
         newGame.setOnClickListener(unused -> continueNewGame());
         newGameExit.setOnClickListener(unused -> exitGame());
