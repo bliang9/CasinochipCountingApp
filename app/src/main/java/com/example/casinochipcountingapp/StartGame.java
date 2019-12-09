@@ -1,7 +1,9 @@
 package com.example.casinochipcountingapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +14,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StartGame extends AppCompatActivity {
 
@@ -25,6 +32,9 @@ public class StartGame extends AppCompatActivity {
     private AlertDialog adddialog;
     public static int playerChipAmount;
     public static int gamenumber = 1;
+    private String gameId;
+    private ArrayList<String> players;
+    private String owner;
 
 
     @Override
@@ -37,7 +47,9 @@ public class StartGame extends AppCompatActivity {
         startGame = findViewById(R.id.startgame);
         exitGame = findViewById(R.id.exitgame);
         playerList = findViewById(R.id.playerList);
-
+        players = new ArrayList<>();
+        TextView textView = findViewById(R.id.textView5);
+        textView.setText(getIntent().getStringExtra("ID"));
 
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +80,8 @@ public class StartGame extends AppCompatActivity {
 
     }
     public void startGame() {
+        Game g = (Game) getIntent().getSerializableExtra("game");
+        g.updateGameState(1);
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
         finish();
@@ -75,7 +89,8 @@ public class StartGame extends AppCompatActivity {
     public void exitGame() {
         playerChipAmount = 0;
         gamenumber = 1;
-
+        Game g = (Game) getIntent().getSerializableExtra("game");
+        g.updateGameState(2);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -83,6 +98,7 @@ public class StartGame extends AppCompatActivity {
 
     public void enterPlayerList() {
         Intent intent = new Intent(this, PlayerListInGame.class);
+        intent.putStringArrayListExtra("list", players);
         startActivity(intent);
         finish();
     }

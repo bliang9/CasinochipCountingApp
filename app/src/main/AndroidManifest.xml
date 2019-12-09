@@ -24,7 +24,6 @@
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".GameActivity" />
         <activity android:name=".PasswordReset" />
-        <activity android:name=".TwoFactorAuthActivity" />
         <activity android:name=".StartGame" />
         <activity android:name=".PlayerListInGame" />
         <activity android:name=".GameRecordList" />

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "869180377022-hbrkd86jr2c9cvumtqpmh7d31a89q0cm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.casinochipcountingapp",
+            "certificate_hash": "8345df604d91785a08af5df7c98311cdba7e89d4"
+          }
+        },
+        {
           "client_id": "869180377022-es94hsv1aclig9cikhuqjq1neaim73a1.apps.googleusercontent.com",
           "client_type": 3
         }

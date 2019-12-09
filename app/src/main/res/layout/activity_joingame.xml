@@ -18,6 +18,11 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="61dp" />
+
     <Button
         android:id="@+id/joinGame"
         android:layout_width="match_parent"
