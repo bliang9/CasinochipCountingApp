@@ -46,6 +46,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText typeEmail;
     private EditText typePassword;
     private EditText typeConfirmPassword;
+    private Button cancelCreateAccount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +92,13 @@ public class CreateAccountActivity extends AppCompatActivity {
         //create account button
         Button createAccount = findViewById(R.id.createAccount1);
         createAccount.setOnClickListener(unused -> createAccount());
+        cancelCreateAccount = findViewById(R.id.cancelCreateAccount);
+        cancelCreateAccount.setOnClickListener(unused -> {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
 
     }
 

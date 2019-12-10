@@ -131,5 +131,11 @@
             android:layout_height="69dp"
             android:text="create account" />
 
+        <Button
+            android:id="@+id/cancelCreateAccount"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:text="Back"/>
+
     </LinearLayout>
 </ScrollView>
