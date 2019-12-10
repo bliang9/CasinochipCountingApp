@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.JsonObject;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends MainActivity {
     private TextView typeinEmail;
     private TextView typeinPassword;
     @Override

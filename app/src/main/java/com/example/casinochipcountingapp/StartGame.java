@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StartGame extends AppCompatActivity {
+public class StartGame extends JoinGameActivity {
 
     private Button startGame;
     private Button exitGame;
