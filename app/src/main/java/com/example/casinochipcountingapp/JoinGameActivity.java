@@ -51,6 +51,9 @@ public class JoinGameActivity extends LoginActivity {
     private AlertDialog createRoomdialog;
     public String roomID;
     public StorageReference myRoomID;
+    private TextView gameID;
+    private EditText typeGameID;
+    private Button joinGame;
 
 
     @Override
@@ -61,7 +64,7 @@ public class JoinGameActivity extends LoginActivity {
         CreateGame.setOnClickListener(unused -> createGame());
         /*firebaseDatabase = FirebaseDatabase.getInstance();
         progressDialog = new ProgressDialog(JoinGameActivity.this);
-        TextView gameID = findViewById(R.id.gameId);
+
         gameID.setTextColor(Color.GRAY);
         TextView typeGameId = findViewById(R.id.typeGameID);
         typeGameId.setTextColor(Color.GREEN);
@@ -72,18 +75,42 @@ public class JoinGameActivity extends LoginActivity {
         keys = new ArrayList<>();
 
          */
-
+        gameID = findViewById(R.id.gameId);
+        typeGameID = findViewById(R.id.typeGameID);
+        typeGameID.setTextColor(Color.WHITE);
+        joinGame = findViewById(R.id.joinGame);
+        joinGame.setOnClickListener(unused -> joinTheGame(typeGameID.getText().toString()));
 
     }
     public void joinTheGame(String gameId) {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference gameToStart = firebaseDatabase.getReference("gamesToStart");
+        //FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        //DatabaseReference gameToStart = firebaseDatabase.getReference("gamesToStart");
+
+
         if (!gameId.equals("")) {
             progressDialog.setMessage("Joining Game");
             progressDialog.show();
-           if (gameToStart.child("gameID").equals(gameId)) {
-
-           }
+            StorageReference listRef = storage.getReference().child("allRoomID/uid");
+            listRef.listAll()
+                    .addOnSuccessListener(new OnSuccessListener<ListResult>() {
+                        @Override
+                        public void onSuccess(ListResult listResult) {
+                            for (StorageReference prefix : listResult.getPrefixes()) {
+                                // All the prefixes under listRef.
+                                // You may call listAll() recursively on them.
+                                if (gameId.equals(prefix.getName())) {
+                                    start();
+                                }
+                            }
+                            progressDialog.dismiss();
+                            // throw an message here says"Game id doesn't exist, please create or try a different one.
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                        }
+                    });
         } else {
             TextView errorMessage = findViewById(R.id.errorMessage);
             errorMessage.setText("Type In Game ID");
@@ -160,10 +187,13 @@ public class JoinGameActivity extends LoginActivity {
 
          */
     }
-    private void start() {
+
+
+    public void start() {
         Intent intent = new Intent(this, StartGame.class);
         startActivity(intent);
         finish();
     }
+
 
 }
