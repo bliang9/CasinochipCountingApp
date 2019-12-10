@@ -167,7 +167,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                         typelastName.getText().toString();
             }
             final String fullName = name;
-            //send email verification
+            //send email  verification
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Creating account");
             progressDialog.show();
