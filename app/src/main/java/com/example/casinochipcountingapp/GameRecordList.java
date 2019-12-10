@@ -20,14 +20,30 @@ public class GameRecordList extends GameActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recordlist);
         myGameHistory = findViewById(R.id.myGameHistory);
-        View viewmyrecord = getLayoutInflater().inflate(R.layout.chunk_gamehistory, myGameHistory, false);
+        int count = 0;
+        for (String a : historyList) {
+            historyList.set(count, "Game " + (count + 1) + "   " + amountChange);
+            View messageChunk = getLayoutInflater().inflate(R.layout.chunk_gamehistory, myGameHistory, false);
+            TextView senderLabel = messageChunk.findViewById(R.id.history);
+            senderLabel.setText(historyList.get(gamenumber - 1));
+            // Do something with any other views in the chunk...
+            myGameHistory.addView(messageChunk);
+            count++;
+        }
+
+        /**View viewmyrecord = getLayoutInflater().inflate(R.layout.chunk_gamehistory, myGameHistory, false);
+
         myRecordScroll = viewmyrecord.findViewById(R.id.myRecordScroll);
+        TextView history = viewmyrecord.findViewById(R.id.history);
+        //TextView textView = new TextView(GameRecordList.this);
+
+
         for (int i = 0; i < historyList.size(); i++ ) {
-            TextView textView = new TextView(GameRecordList.this);
-            textView.setText(historyList.get(i));
 
         }
         myGameHistory.addView(viewmyrecord);
+         */
+
 
         /*
          */

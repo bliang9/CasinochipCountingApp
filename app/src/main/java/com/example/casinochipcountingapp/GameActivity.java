@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class GameActivity extends StartGame {
 
-    private int currentRound = 1;
+
     private ArrayList<String> recordList;
     private TextView playerAmount;
     private Button exit;
@@ -66,18 +66,12 @@ public class GameActivity extends StartGame {
         setContentView(R.layout.activity_game);
         amountStart = playerChipAmount;
         String amount = Integer.toString(playerChipAmount);
+
         ((TextView) findViewById(R.id.playerAmount)).setText(amount);
         nextRound = findViewById(R.id.nextRound);
         record = findViewById(R.id.record);
-
-
-
-
-
-
-
-
-
+        String a  =Integer.toString(currentRound);
+        ((TextView) findViewById(R.id.roundNumber)).setText(a);
 
 
         exit = findViewById(R.id.exit);
@@ -271,6 +265,7 @@ public class GameActivity extends StartGame {
 
     private void continueNewGame() {
         gamenumber++;
+        currentRound = 1;
         Intent intent = new Intent(this, StartGame.class);
         startActivity(intent);
         finish();
