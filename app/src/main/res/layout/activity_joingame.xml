@@ -42,9 +42,10 @@
         android:layout_height="74dp"
         android:ems="10"
         android:hint="    Type In Game ID"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         android:textSize="25dp" />
+
 
     <TextView
         android:id="@+id/errorMessage"

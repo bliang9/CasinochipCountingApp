@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -54,7 +55,8 @@ public class JoinGameActivity extends LoginActivity {
     private TextView gameID;
     private EditText typeGameID;
     private Button joinGame;
-    public int roomIDNumber;
+    public static int roomIDNumber;
+    public static int createRoomID = 0;
 
 
     @Override
@@ -89,12 +91,16 @@ public class JoinGameActivity extends LoginActivity {
 
 
         if (!gameId.equals("")) {
-            progressDialog.setMessage("Joining Game");
-            progressDialog.show();
+            //progressDialog.setMessage("Joining Game");
+            //progressDialog.show();
 
             roomIDNumber = Integer.parseInt(gameId);
-            if (roomIDNumber == 88) {
+            if (roomIDNumber == createRoomID) {
                 start();
+            } else {
+                Toast.makeText(JoinGameActivity.this,
+                        "ROOM DOESN'T EXIST!",
+                        Toast.LENGTH_SHORT).show();
             }
             /*StorageReference listRef = storage.getReference().child("allRoomID/uid");
             listRef.listAll()
@@ -138,7 +144,8 @@ public class JoinGameActivity extends LoginActivity {
         createRoomAgree.setOnClickListener(unused -> {
             roomID = createRoomEdit.getText().toString();
             roomIDNumber = Integer.parseInt(roomID);
-            if (roomIDNumber == 88) {
+            createRoomID = roomIDNumber;
+            if (0 <= roomIDNumber && roomIDNumber <= 1000) {
                 start();
             }
             /*StorageReference listRef = storage.getReference().child("allRoomID/uid");

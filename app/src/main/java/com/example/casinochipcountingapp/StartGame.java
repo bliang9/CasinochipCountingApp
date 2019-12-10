@@ -27,7 +27,7 @@ public class StartGame extends JoinGameActivity {
     private TextView gameNumber;
     private AlertDialog adddialog;
     public static int playerChipAmount;
-    public static int gamenumber = 1;
+    public int gamenumber = 1;
     private String gameId;
     private ArrayList<String> players;
     private String owner;
@@ -36,6 +36,8 @@ public class StartGame extends JoinGameActivity {
     public static ArrayList<String> historyList = new ArrayList<>();
     public static int amountChange;
     public static int currentRound = 1;
+    private int b;
+    public static int gameCount = 0;
 
     public LinearLayout myGamePlayer;
     public ScrollView playersScroll;
@@ -48,14 +50,15 @@ public class StartGame extends JoinGameActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startgame);
         gameNumber = findViewById(R.id.gameNumber);
-        String gn = Integer.toString(gamenumber);
+        String gn = Integer.toString((gamenumber + gameCount));
         gameNumber.setText("Game " + gn);
         startGame = findViewById(R.id.startgame);
         exitGame = findViewById(R.id.exitgame);
         playerList = findViewById(R.id.playerList);
         players = new ArrayList<>();
+        String a = Integer.toString(roomIDNumber);
         TextView textView = findViewById(R.id.roomnumbertextview);
-        textView.setText("Room ID:  " + "88");
+        textView.setText("Room ID:  " + a);
 
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,11 +91,12 @@ public class StartGame extends JoinGameActivity {
     public void startGame() {
         //Game g = (Game) getIntent().getSerializableExtra("game");
         //g.updateGameState(1);
+        b = gamenumber;
 
-
-        historyList.add(gamenumber - 1, "Game "  + gamenumber + "  " + amountChange);
+        historyList.add((gamenumber + gameCount - 1), "Game "  + b + "  " + amountChange);
         String a = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         playerName.add(0, a);
+        gameCount++;
 
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
@@ -100,7 +104,7 @@ public class StartGame extends JoinGameActivity {
     }
     public void exitGame() {
         playerChipAmount = 0;
-        gamenumber = 1;
+        gameCount = 0;
         currentRound = 1;
         //Game g = (Game) getIntent().getSerializableExtra("game");
         //g.updateGameState(2);
