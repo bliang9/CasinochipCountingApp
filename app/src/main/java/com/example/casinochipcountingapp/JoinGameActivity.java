@@ -54,6 +54,7 @@ public class JoinGameActivity extends LoginActivity {
     private TextView gameID;
     private EditText typeGameID;
     private Button joinGame;
+    public int roomIDNumber;
 
 
     @Override
@@ -90,7 +91,12 @@ public class JoinGameActivity extends LoginActivity {
         if (!gameId.equals("")) {
             progressDialog.setMessage("Joining Game");
             progressDialog.show();
-            StorageReference listRef = storage.getReference().child("allRoomID/uid");
+
+            roomIDNumber = Integer.parseInt(gameId);
+            if (roomIDNumber == 88) {
+                start();
+            }
+            /*StorageReference listRef = storage.getReference().child("allRoomID/uid");
             listRef.listAll()
                     .addOnSuccessListener(new OnSuccessListener<ListResult>() {
                         @Override
@@ -118,6 +124,9 @@ public class JoinGameActivity extends LoginActivity {
             errorMessage.setTextColor(Color.RED);
             errorMessage.setTextSize(20);
         }
+
+             */
+        }
     }
     public void createGame() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(JoinGameActivity.this);
@@ -128,7 +137,11 @@ public class JoinGameActivity extends LoginActivity {
 //retrieve https://firebase.google.com/docs/storage/android/create-reference?authuser=0;
         createRoomAgree.setOnClickListener(unused -> {
             roomID = createRoomEdit.getText().toString();
-            StorageReference listRef = storage.getReference().child("allRoomID/uid");
+            roomIDNumber = Integer.parseInt(roomID);
+            if (roomIDNumber == 88) {
+                start();
+            }
+            /*StorageReference listRef = storage.getReference().child("allRoomID/uid");
             listRef.listAll()
                     .addOnSuccessListener(new OnSuccessListener<ListResult>() {
                         @Override
@@ -151,7 +164,12 @@ public class JoinGameActivity extends LoginActivity {
                         public void onFailure(@NonNull Exception e) {
                         }
                     });
+
+             */
         });
+
+
+
         mBuilder.setView(mView);
         AlertDialog k = mBuilder.create();
         createRoomdialog = k;

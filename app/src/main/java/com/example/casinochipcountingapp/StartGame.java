@@ -1,9 +1,6 @@
 package com.example.casinochipcountingapp;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,13 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class StartGame extends JoinGameActivity {
 
@@ -60,8 +54,8 @@ public class StartGame extends JoinGameActivity {
         exitGame = findViewById(R.id.exitgame);
         playerList = findViewById(R.id.playerList);
         players = new ArrayList<>();
-        TextView textView = findViewById(R.id.textView5);
-        textView.setText(getIntent().getStringExtra("ID"));
+        TextView textView = findViewById(R.id.roomnumbertextview);
+        textView.setText("Room ID:  " + "88");
 
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override

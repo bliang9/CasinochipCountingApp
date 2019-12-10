@@ -20,7 +20,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/roomnumbertextview"
             android:layout_width="218dp"
             android:layout_height="73dp"
             android:layout_gravity="center"
