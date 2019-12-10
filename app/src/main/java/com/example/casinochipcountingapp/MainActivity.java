@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     public StorageReference everythingRef;
     public StorageReference allRoomIDRef;
     public FirebaseStorage storage;
+    public StorageReference emialListRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

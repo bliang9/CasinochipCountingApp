@@ -50,7 +50,7 @@ public class JoinGameActivity extends LoginActivity {
     private Button createRoomAgree;
     private AlertDialog createRoomdialog;
     public String roomID;
-    public StorageReference myRoomID;
+    public StorageReference myRoomIDRef;
     private TextView gameID;
     private EditText typeGameID;
     private Button joinGame;
@@ -99,6 +99,7 @@ public class JoinGameActivity extends LoginActivity {
                                 // All the prefixes under listRef.
                                 // You may call listAll() recursively on them.
                                 if (gameId.equals(prefix.getName())) {
+                                    emialListRef =  myRoomIDRef.child(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                                     start();
                                 }
                             }
@@ -139,7 +140,8 @@ public class JoinGameActivity extends LoginActivity {
                                     //"Room id has already existed. Type in New One.
                                 }
                             }
-                            myRoomID = allRoomIDRef.child(roomID);
+                            myRoomIDRef = allRoomIDRef.child(roomID);
+                            emialListRef =  myRoomIDRef.child(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                             start();
 
                         }
