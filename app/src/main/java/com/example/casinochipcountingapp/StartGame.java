@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -41,6 +42,10 @@ public class StartGame extends AppCompatActivity {
     public static ArrayList<String> historyList = new ArrayList<>();
     public static int amountChange;
     public static int currentRound = 1;
+
+    public LinearLayout myGamePlayer;
+    public ScrollView playersScroll;
+    public static ArrayList<String> playerName = new ArrayList<>();
 
 
 
@@ -90,8 +95,10 @@ public class StartGame extends AppCompatActivity {
         //Game g = (Game) getIntent().getSerializableExtra("game");
         //g.updateGameState(1);
 
-        historyList.add(gamenumber - 1, "Game "  + gamenumber + "  " + amountChange);
 
+        historyList.add(gamenumber - 1, "Game "  + gamenumber + "  " + amountChange);
+        String a = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        playerName.add(0, a);
 
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);

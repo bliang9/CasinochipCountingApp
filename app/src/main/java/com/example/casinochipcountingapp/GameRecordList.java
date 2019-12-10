@@ -31,6 +31,17 @@ public class GameRecordList extends GameActivity {
             count++;
         }
 
+        myGamePlayer = findViewById(R.id.myGamePlayer);
+        int countb = 0;
+        for (String a : playerName) {
+            View messageChunk = getLayoutInflater().inflate(R.layout.chunk_playerlist, myGamePlayer, false);
+            TextView senderLabel = messageChunk.findViewById(R.id.playersInGame);
+            senderLabel.setText(playerName.get(countb));
+            // Do something with any other views in the chunk...
+            myGamePlayer.addView(messageChunk);
+            countb++;
+        }
+
         /**View viewmyrecord = getLayoutInflater().inflate(R.layout.chunk_gamehistory, myGameHistory, false);
 
         myRecordScroll = viewmyrecord.findViewById(R.id.myRecordScroll);
