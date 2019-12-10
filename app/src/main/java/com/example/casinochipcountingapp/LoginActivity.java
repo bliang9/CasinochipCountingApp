@@ -38,15 +38,15 @@ public class LoginActivity extends AppCompatActivity {
         Button forgetPassword = findViewById(R.id.forgetPassword);
         forgetPassword.setOnClickListener(unused -> forgetPassword());
         typeinEmail = findViewById(R.id.typeinEmail);
-        typeinEmail.getBackground().mutate().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
-        typeinEmail.setTextColor(Color.GREEN);
+        typeinEmail.getBackground().mutate().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+        typeinEmail.setTextColor(Color.BLACK);
         TextView email = findViewById(R.id.email);
-        email.setTextColor(Color.YELLOW);
+
         TextView password = findViewById(R.id.password);
-        password.setTextColor(Color.YELLOW);
+
         typeinPassword = findViewById(R.id.typeinPassword);
-        typeinPassword.getBackground().mutate().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
-        typeinPassword.setTextColor(Color.GREEN);
+        typeinPassword.getBackground().mutate().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+        typeinPassword.setTextColor(Color.BLACK);
         Button createAccount = findViewById(R.id.createAccount);
         createAccount.setOnClickListener(unused -> createAccount());
         TextView error = findViewById(R.id.errorMessage);

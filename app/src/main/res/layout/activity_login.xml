@@ -2,11 +2,18 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background= "@drawable/pokerchips">
+    android:background="@drawable/background_texture6">
+
     <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background= "@drawable/pokerchips">
+        android:background="@color/common_google_signin_btn_text_dark_disabled"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal"></LinearLayout>
 
         <TextView
             android:id="@+id/email"
@@ -14,7 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Email"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="25dp" />
 
         <EditText
             android:id="@+id/typeinEmail"
@@ -29,7 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Password" />
+            android:text="Password"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/typeinPassword"
@@ -75,6 +85,6 @@
         <TextView
             android:id="@+id/errorMessageEmailToReset"
             android:layout_width="match_parent"
-            android:layout_height="57dp" />
+            android:layout_height="258dp" />
     </LinearLayout>
 </ScrollView>

@@ -52,50 +52,43 @@ public class CreateAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_createaccount);
         //first name;
         TextView firstName = findViewById(R.id.firstName);
-        firstName.setTextColor(Color.YELLOW);
         typefirstName = findViewById(R.id.typeFirstName);
         typefirstName.setTextSize(20);
-        typefirstName.getBackground().mutate().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP);
-        typefirstName.setTextColor(Color.GREEN);
+        typefirstName.getBackground().mutate().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+        typefirstName.setTextColor(Color.BLACK);
         //middle name
         TextView middleName = findViewById(R.id.middleName);
-        middleName.setTextColor(Color.YELLOW);
         typeMiddleName = findViewById(R.id.typeMiddleName);
         typeMiddleName.setTextSize(20);
-        typeMiddleName.getBackground().mutate().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP);
-        typeMiddleName.setTextColor(Color.GREEN);
+        typeMiddleName.getBackground().mutate().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+        typeMiddleName.setTextColor(Color.BLACK);
         //lastName
         TextView lastName = findViewById(R.id.lastName);
-        lastName.setTextColor(Color.YELLOW);
         typelastName = findViewById(R.id.typeLastName);
         typelastName.setTextSize(20);
-        typelastName.getBackground().mutate().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP);
-        typelastName.setTextColor(Color.GREEN);
+        typelastName.getBackground().mutate().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+        typelastName.setTextColor(Color.BLACK);
         //email
         TextView email = findViewById(R.id.email);
-        email.setTextColor(Color.YELLOW);
         typeEmail = findViewById(R.id.typeinEmail);
         typeEmail.setTextSize(20);
-        typeEmail.getBackground().mutate().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP);
-        typeEmail.setTextColor(Color.GREEN);
+        typeEmail.getBackground().mutate().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+        typeEmail.setTextColor(Color.BLACK);
         //phone number
         //password
         TextView password = findViewById(R.id.password);
-        password.setTextColor(Color.YELLOW);
         typePassword = findViewById(R.id.typeinPassword);
         typePassword.setTextSize(20);
-        typePassword.getBackground().mutate().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP);
-        typePassword.setTextColor(Color.GREEN);
+        typePassword.getBackground().mutate().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+        typePassword.setTextColor(Color.BLACK);
         //confirm password
         TextView confirmedpassword = findViewById(R.id.confirmPassword);
-        confirmedpassword.setTextColor(Color.YELLOW);
         typeConfirmPassword= findViewById(R.id.typeinConfirmPassword);
         typeConfirmPassword.setTextSize(20);
-        typeConfirmPassword.getBackground().mutate().setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP);
-        typeConfirmPassword.setTextColor(Color.GREEN);
+        typeConfirmPassword.getBackground().mutate().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+        typeConfirmPassword.setTextColor(Color.BLACK);
         //create account button
         Button createAccount = findViewById(R.id.createAccount1);
-        createAccount.setBackgroundColor(Color.GREEN);
         createAccount.setOnClickListener(unused -> createAccount());
 
     }

@@ -14,13 +14,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView welcomeToCasinoChip = findViewById(R.id.welcomeToCasinochip);
-        welcomeToCasinoChip.setTextColor(Color.GREEN);
         Button enter = findViewById(R.id.enter);
         enter.setOnClickListener(unused -> enterGame());
     }
     public void enterGame() {
-        Intent intent = new Intent(this, StartGame.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
