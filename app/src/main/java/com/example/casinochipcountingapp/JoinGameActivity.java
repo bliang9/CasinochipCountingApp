@@ -102,7 +102,7 @@ public class JoinGameActivity extends LoginActivity {
                         "ROOM DOESN'T EXIST!",
                         Toast.LENGTH_SHORT).show();
             }
-            /*StorageReference listRef = storage.getReference().child("allRoomID/uid");
+            /* StorageReference listRef = storage.getReference().child("allRoomID/uid");
             listRef.listAll()
                     .addOnSuccessListener(new OnSuccessListener<ListResult>() {
                         @Override
